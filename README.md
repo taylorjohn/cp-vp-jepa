@@ -2,6 +2,8 @@
 
 **A biologically-inspired AI agent that learns, sleeps, dreams, and corrects its own logic.**
 
+![Alt text](images/kid-learning-shapes.png)
+
 This project implements a **Vision-Language Joint Embedding Predictive Architecture (VL-JEPA)** that simulates early-stage cognitive development. Unlike standard classifiers, this agent possesses "Agency": it realizes when it doesn't know a concept, pauses to learn it, and uses a dual-process brain (Intuition vs. Logic) to prevent hallucinations.
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
