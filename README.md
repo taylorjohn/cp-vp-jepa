@@ -45,14 +45,24 @@ python3 vl_jepa_final_fusion.py
 Once the agent finishes its "Infancy" phase (Physics Calibration), it enters Interactive Mode. You can type the following commands:
 
 Command	Description	Example
-explain: <phrase>	Introspects and describes a mental image. Triggers JIT learning if concepts are unknown.	explain: large purple star
-compare: <A> to <B>	Measures semantic and visual distance between two concepts.	compare: red square to blue circle
+explain: <phrase>	Introspects and describes a mental image. Triggers JIT learning if concepts are unknown.	
+explain: large purple star
+
+compare: <A> to <B>	Measures semantic and visual distance between two concepts.	
+compare: red square to blue circle
+
 drill: <A> vs <B>	Starts a contrastive training session to separate confusing concepts.	drill: triangle vs diamond
+
 solidify	Sleep Mode. Runs a deep memory consolidation cycle to prevent forgetting.	solidify
+
 auto	Agent autonomously picks unknown concepts and learns them.	auto
+
 exam: <concept>	Generates a report card (25 tests) to verify mastery.	exam: red
+
 show <z> <c> <s>	Debugs the visual cortex with a specific input.	show medium black circle
+
 idle	Retries failed concepts from the queue.	idle
+
 🧪 The "Turing Test" Script
 To verify all AGI features (Perception, Agency, Memory, and Logic), run this sequence:
 
