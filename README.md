@@ -30,6 +30,41 @@ To solve **Catastrophic Forgetting** (e.g., learning "Blue" erases "Red"), the a
 When the agent confuses similar concepts (e.g., Triangle vs. Diamond), the `drill` mode forces a high-intensity contrastive training session until the semantic distance between the two concepts exceeds a safety threshold.
 
 ---
+## 📊 Comparison: VL-JEPA vs. Other AI Architectures
+
+| Feature | **This VL-JEPA (Final Fusion)** | **Standard I-JEPA (Meta)** | **LLMs (GPT, Gemini)** | **Traditional ML (ResNet)** |
+| :--- | :--- | :--- | :--- | :--- |
+| **Core Objective** | **Active Agency** (Realize ignorance & fix it) | **Representation** (Learn features from masking) | **Generation** (Predict the next word) | **Classification** (Map input to label) |
+| **Cognitive Style** | **Dual-Process** (Intuition + Hard Logic) | Single-Process (Neural weights only) | Single-Process (Neural weights only) | Single-Process (Statistical mapping) |
+| **Learning Method** | **Interleaved Replay** (Mixes new & old) | Self-Supervised (Masked Autoencoding) | Self-Supervised (Trillions of tokens) | Supervised (Human labels required) |
+| **Data Efficiency** | **Extreme** (Learns from ~16 examples) | High | Low (Needs massive datasets) | Medium (Needs thousands of examples) |
+| **Memory** | **Active Hippocampus** (Sleep/Solidify cycles) | Static Weights (Catastrophic forgetting) | Context Window (Short-term only) | Static Weights (Retrain to update) |
+| **Hallucination** | **Self-Correcting** (Logic rejects wrong intuition) | N/A (Predicts embeddings, not pixels) | **Common** (Confidently wrong) | N/A (Just misclassifies) |
+| **Plasticity** | **High** (Learns new concepts live) | Low (Pre-trained & Frozen) | None (Frozen after training) | None (Frozen after training) |
+| **Compute Cost** | **Tiny** (Runs on CPU/Mac Mini) | High (Requires GPU clusters) | Massive (Data Centers) | Moderate (GPU helpful) |
+
+---
+
+### 🔑 Key Differences Explained
+
+#### 1. "System 2" Logic (The Self-Correction Loop)
+* **Most AI (LLMs/CNNs):** Rely 100% on "System 1" (Intuition). If an LLM thinks $2+2=5$, it just says it. It has no internal "calculator" to check its work before speaking.
+* **This VL-JEPA:** Has a distinct "System 2" (The Physics Engine). When Intuition says "I see a Triangle," System 2 measures the angles. If they don't match, it **rejects its own thought** (`🚨 REJECTION!`) and retrains itself immediately.
+
+#### 2. Agency & JIT Learning
+* **Traditional ML:** If you show a ResNet a "Star" when it was only trained on "Circles," it will confidently classify it as a Circle. It has no concept of "Unknown."
+* **This VL-JEPA:** Recognizes **Semantic Gaps**. If you ask about a "Star" and it has no embedding for it, it pauses, triggers a learning loop (`🚧 Learning 'star'...`), and creates the concept on the fly.
+
+#### 3. Catastrophic Forgetting vs. Sleep
+* **Standard Neural Nets:** If you train a model on "Task A" and then "Task B," it usually deletes "Task A" to make room.
+* **This VL-JEPA:** Uses **Interleaved Batching** and **Sleep Cycles (`solidify`)**. It mimics the biological hippocampus by replaying old memories (Circles/Reds) while learning new ones (Stars/Purples), ensuring stability.
+
+#### 4. Semantic Drilling
+* **LLMs:** Often confuse similar concepts (e.g., specific coding syntax) and require fine-tuning to fix.
+* **This VL-JEPA:** Can be ordered to **`drill`**. It enters a contrastive arena where it faces two confusing concepts (Triangle vs. Diamond) and is forced to mathematically separate them in its latent space until they are distinct.
+
+
+---
 
 ## 🛠️ Installation
 
