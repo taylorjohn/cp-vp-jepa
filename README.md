@@ -261,10 +261,10 @@ show [size] [color] [shape]: Force-feeds an image to the "Eye" and probes System
 ### 🧬 Architecture: System 1 vs. System 2
 The agent makes decisions using two distinct systems, modeled after human cognition:
 
-Component	Architecture	Role	Behavior
-System 1	Vision Transformer (ViT)	Intuition	Fast, pattern-matching, prone to hallucination. Sees "Red" and "Blue" as mathematical vectors.
-System 2	Symbolic Physics Engine	Logic	Slow, rule-based, infallible. Measures geometry (sides, angles) to verify System 1.
-The Interaction: If System 1 says "I see a Triangle" but System 2 measures 4 sides, the agent triggers a 🚨 REJECTION event, overrides the neural network, and prevents the hallucination from being reinforced.
+| Component| Architecture| Role| Behavior
+| :--- | :--- | :--- | :--- |
+| System 1| Vision Transformer (ViT)| Intuition| "Fast, pattern-matching, prone to hallucination. Sees ""Red"" and ""Blue"" as mathematical vectors."
+| System 2| Symbolic Physics Engine| Logic| "Slow, rule-based, infallible. Measures geometry (sides, angles) to verify System 1."
 
 ### 🗺️ Extending the Universe
 The agent lives in a "Closed World" defined by the physics dictionaries at the top of the script. To add new concepts, edit vl_jepa_curriculum_final.py:
