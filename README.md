@@ -138,3 +138,45 @@ auto
 ---
 
 > *"The goal is not just to classify, but to understand."*
+
+## 🚀 v4.0 Update: Bootcamp Edition & Autonomous Agent
+
+This release represents a major architectural leap, transitioning the system from a manual training tool to a **semi-autonomous agent**. It features a rewritten memory management system, "Focus Attention" mechanics for overcoming ViT shape bias, and native optimization for Apple Silicon (MPS).
+
+### ✨ Key Features
+
+#### 1. Smart Auto-Pilot (`auto`)
+The `auto` command now supports flexible constraints (time or count) and includes **Smart Interleaving**. The agent automatically monitors its own short-term memory buffer and triggers a "Power Nap" (`solidify`) every 3 concepts to prevent catastrophic forgetting.
+
+**Usage:**
+- `auto` : Learns 3 random concepts (Default).
+- `auto 10` : Learns 10 random concepts.
+- `auto 5m` : Runs autonomously for 5 minutes.
+- `auto 1h` : Runs autonomously for 1 hour.
+
+#### 2. Selective Attention Mechanism ("Focus Mode")
+Vision Transformers typically exhibit a strong "Shape Bias," often struggling to separate colors in the latent space. This version introduces a dynamic loss function:
+- **Shape Mode:** Standard loss.
+- **Color Mode:** Applies a **15x penalty** to color errors.
+This forces the gradient descent algorithm to prioritize pixel intensity over edge detection during color drills, effectively "teaching" the AI to see color.
+
+#### 3. Automated Bootcamps
+New macro commands run round-robin tournaments to reinforce concept separation without manual input.
+- `bootcamp color`: Drills every color pair (e.g., Red vs Blue, Blue vs Green) to maximize vector distance.
+- `bootcamp shape`: Drills geometric distinctions (e.g., Square vs Rectangle).
+
+#### 4. Mac/MPS Hardware Stabilization
+- **Memory Stride Fix:** Implements `.contiguous()` checks on all tensor permutations to resolve the `RuntimeError: view size is not compatible` crash common on Apple Neural Engines.
+- **Global Scope Resolution:** Moves core cognitive functions (`learn_concept`, `explain`, `solidify`) to the global scope to prevent `NameError` during extended autonomous sessions.
+
+### 📋 Command Reference
+
+| Command | Example | Description |
+| :--- | :--- | :--- |
+| **Auto** | `auto 30m` | Starts self-directed learning for a specific duration (m/h) or count. |
+| **Bootcamp** | `bootcamp color` | Initiates an intensive round-robin drill for a specific domain. |
+| **Drill** | `drill: red vs blue` | Manually forces contrastive learning between two specific concepts. |
+| **Solidify** | `solidify` | Triggers "Deep Sleep" (Hippocampal Replay) to consolidate long-term memory. |
+| **Explain** | `explain: large red star` | Inference test. If the agent encounters an unknown word, it halts to learn it first (JIT Learning). |
+| **Compare** | `compare: red square to blue circle` | Returns the Euclidean distance between two concepts in the agent's latent space. |
+
