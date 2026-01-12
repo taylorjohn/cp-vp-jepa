@@ -180,3 +180,114 @@ New macro commands run round-robin tournaments to reinforce concept separation w
 | **Explain** | `explain: large red star` | Inference test. If the agent encounters an unknown word, it halts to learn it first (JIT Learning). |
 | **Compare** | `compare: red square to blue circle` | Returns the Euclidean distance between two concepts in the agent's latent space. |
 
+# 🧠 VL-JEPA: Curriculum Edition (Mac Silicon Optimized)
+
+![Status](https://img.shields.io/badge/Status-Stable-success)
+![Hardware](https://img.shields.io/badge/Hardware-Apple_Silicon_MPS-gray?logo=apple)
+![Architecture](https://img.shields.io/badge/Architecture-Neuro_Symbolic_ViT-blue)
+
+A biologically inspired Artificial General Intelligence (AGI) prototype designed to run natively on Apple Silicon (M1/M2/M3). 
+
+Unlike standard neural networks, this agent possesses **metacognition** (it knows what it doesn't know), **hippocampal memory** (it sleeps to consolidate knowledge), and a **curriculum knowledge graph** (it learns simple concepts before complex ones).
+
+## 🌟 Key Features
+
+* **Mac/MPS Native:** Optimized memory strides (`.contiguous()`) to prevent `RuntimeError` crashes on the Apple Neural Engine.
+* **Neuro-Symbolic Core:** Combines a Vision Transformer (Intuition/System 1) with a Physics Engine (Logic/System 2). Logic overrides hallucination.
+* **Curriculum Learning:** Uses a directed acyclic graph (DAG) to map dependencies. The agent will not attempt to learn "Brown" until it has mastered "Red" and "Green."
+* **Active Agency:** If asked to explain an unknown concept, the agent halts, triggers a Just-In-Time (JIT) learning loop, masters the concept, and *then* answers.
+* **Selective Attention:** Overcomes the standard Vision Transformer "Shape Bias" by dynamically re-weighting the loss function during Color Bootcamps.
+* **Robust Auto-Pilot:** Can run unsupervised for set counts or durations, managing its own sleep cycles to prevent Catastrophic Forgetting.
+
+## 🛠️ Installation & Usage
+
+### Prerequisites
+You need Python 3 installed along with PyTorch and Pillow.
+
+```bash
+pip install torch numpy pillow
+```
+Running the Agent
+
+Ensure you are running this on a Mac with Apple Silicon for optimal performance (though it will fallback to CPU if needed).
+
+```bash
+python3 vl_jepa_curriculum_final.py
+```
+
+### 🤖 Command Reference
+Once the agent is online, interact with it using these natural language commands:
+
+#### 1. Auto-Pilot (Unsupervised Learning)
+
+The agent autonomously explores the universe, picking concepts based on its Knowledge Graph and managing memory.
+
+auto: Learns 3 concepts (Default).
+
+auto 10: Learns 10 concepts, sleeping every 3 items.
+
+auto 30m: Runs continuously for 30 minutes.
+
+auto 1h: Runs continuously for 1 hour.
+
+#### 2. Agency & Curriculum
+
+consult: The agent analyzes its own knowledge gaps and suggests the next logical step (e.g., "Master! I know Red and Blue. May I learn Purple?").
+
+explain: [text]: Asks the agent to visualize and analyze a complex query (e.g., explain: small brown octagon). If it lacks knowledge, it will auto-learn the missing pieces before answering.
+
+#### 3. Training Modules
+
+bootcamp color: Forces a round-robin tournament of all color pairs with high attention penalties. Use this if the agent struggles to distinguish colors.
+
+bootcamp shape: Rapid-fire contrastive learning for geometry.
+
+drill: [A] vs [B]: Manually triggers a contrastive session between two concepts (e.g., drill: red vs blue).
+
+learn: [concept]: Forces the agent to focus on a specific concept until mastery (25/25 score).
+
+#### 4. Memory Management
+
+solidify: Triggers "Deep Sleep." The agent replays randomized memories from its buffer to consolidate short-term weights into long-term stability. (Automatically triggered during auto runs).
+
+#### 5. Diagnostics
+
+exam: [concept]: Runs a 25-question test on a specific concept.
+
+compare: [A] to [B]: Measures the semantic distance between two concepts in the agent's latent space.
+
+show [size] [color] [shape]: Force-feeds an image to the "Eye" and probes System 1 (Intuition) vs System 2 (Logic).
+
+### 🧬 Architecture: System 1 vs. System 2
+The agent makes decisions using two distinct systems, modeled after human cognition:
+
+Component	Architecture	Role	Behavior
+System 1	Vision Transformer (ViT)	Intuition	Fast, pattern-matching, prone to hallucination. Sees "Red" and "Blue" as mathematical vectors.
+System 2	Symbolic Physics Engine	Logic	Slow, rule-based, infallible. Measures geometry (sides, angles) to verify System 1.
+The Interaction: If System 1 says "I see a Triangle" but System 2 measures 4 sides, the agent triggers a 🚨 REJECTION event, overrides the neural network, and prevents the hallucination from being reinforced.
+
+### 🗺️ Extending the Universe
+The agent lives in a "Closed World" defined by the physics dictionaries at the top of the script. To add new concepts, edit vl_jepa_curriculum_final.py:
+
+#### 1. Add Geometry: Update SHAPE_SIDES:
+
+```Python
+"decagon": 10.0,
+"line": 1.0
+```
+
+#### 2. Add Physics: Update draw_tensor to define how to render the new shape via PIL:
+
+```Python
+elif shape == "decagon":
+    # logic to draw 10 sides...
+```
+#### 3. Add Dependencies: Update CURRICULUM to teach the agent the hierarchy:
+
+```Python
+CURRICULUM = {
+    "decagon": ["pentagon"], # Decagon requires knowledge of Pentagon
+    ...
+}
+```
+
