@@ -37,36 +37,36 @@ When the agent confuses similar concepts (e.g., Triangle vs. Diamond), the `dril
 2. **Install Dependencies**:
    ```bash
    pip install torch numpy pillow
-Run the Agent:
+   ```
+3. **Run the Agent**:
+   ```bash
+   python3 vl_jepa_final_fusion.py
+   ```
 
-Bash
-python3 vl_jepa_final_fusion.py
-🎮 Interactive Commands
-Once the agent finishes its "Infancy" phase (Physics Calibration), it enters Interactive Mode. You can type the following commands:
+---
 
-Command	Description	Example
-explain: <phrase>	Introspects and describes a mental image. Triggers JIT learning if concepts are unknown.	
-explain: large purple star
+## 🎮 Interactive Commands
 
-compare: <A> to <B>	Measures semantic and visual distance between two concepts.	
-compare: red square to blue circle
+Once the agent finishes its "Infancy" phase (Physics Calibration), it enters **Interactive Mode**. You can type the following commands:
 
-drill: <A> vs <B>	Starts a contrastive training session to separate confusing concepts.	drill: triangle vs diamond
+| Command | Description | Example |
+| :--- | :--- | :--- |
+| **`explain: <phrase>`** | Introspects and describes a mental image. Triggers JIT learning if concepts are unknown. | `explain: large purple star` |
+| **`compare: <A> to <B>`** | Measures semantic and visual distance between two concepts. | `compare: red square to blue circle` |
+| **`drill: <A> vs <B>`** | Starts a contrastive training session to separate confusing concepts. | `drill: triangle vs diamond` |
+| **`solidify`** | **Sleep Mode.** Runs a deep memory consolidation cycle to prevent forgetting. | `solidify` |
+| **`auto`** | Agent autonomously picks unknown concepts and learns them. | `auto` |
+| **`exam: <concept>`** | Generates a report card (25 tests) to verify mastery. | `exam: red` |
+| **`show <z> <c> <s>`** | Debugs the visual cortex with a specific input. | `show medium black circle` |
+| **`idle`** | Retries failed concepts from the queue. | `idle` |
 
-solidify	Sleep Mode. Runs a deep memory consolidation cycle to prevent forgetting.	solidify
+---
 
-auto	Agent autonomously picks unknown concepts and learns them.	auto
+## 🧪 The "Turing Test" Script
 
-exam: <concept>	Generates a report card (25 tests) to verify mastery.	exam: red
-
-show <z> <c> <s>	Debugs the visual cortex with a specific input.	show medium black circle
-
-idle	Retries failed concepts from the queue.	idle
-
-🧪 The "Turing Test" Script
 To verify all AGI features (Perception, Agency, Memory, and Logic), run this sequence:
 
-Plaintext
+```text
 show medium red circle
 exam: red
 explain: large purple hexagon
@@ -76,28 +76,28 @@ solidify
 exam: red
 compare: red square to blue circle
 auto
-Expected Behavior:
+```
 
-Physics: show calculates correct geometry (0 sides for circle).
+**Expected Behavior:**
+1.  **Physics:** `show` calculates correct geometry (0 sides for circle).
+2.  **Agency:** `explain` triggers auto-learning for "Purple" and "Hexagon".
+3.  **Plasticity:** `drill` increases the distance between Triangle/Diamond.
+4.  **Retention:** `solidify` ensures `exam: red` remains high (>20/25) even after learning new shapes.
 
-Agency: explain triggers auto-learning for "Purple" and "Hexagon".
+---
 
-Plasticity: drill increases the distance between Triangle/Diamond.
+## 📂 Project Structure
 
-Retention: solidify ensures exam: red remains high (>20/25) even after learning new shapes.
+- **`vl_jepa_final_fusion.py`**: The complete, single-file source code.
+- **`final_fusion_logs/`**: Directory containing generated images and exam report cards.
 
-📂 Project Structure
-vl_jepa_final_fusion.py: The complete, single-file source code.
+## 🤖 How it Works (Under the Hood)
 
-final_fusion_logs/: Directory containing generated images and exam report cards.
+1.  **Visual Cortex:** A 5-layer Hierarchical CNN processes 200x200 pixel images.
+2.  **Latent Space:** Concepts are mapped to orthogonal vectors to prevent "Mode Collapse."
+3.  **Replay Buffer:** Stores up to 10,000 past experiences.
+4.  **Interleaved Training:** Every training step mixes new data with old memories to maintain stability.
 
-🤖 How it Works (Under the Hood)
-Visual Cortex: A 5-layer Hierarchical CNN processes 200x200 pixel images.
+---
 
-Latent Space: Concepts are mapped to orthogonal vectors to prevent "Mode Collapse."
-
-Replay Buffer: Stores up to 10,000 past experiences.
-
-Interleaved Training: Every training step mixes new data with old memories to maintain stability.
-
-"The goal is not just to classify, but to understand."
+> *"The goal is not just to classify, but to understand."*
