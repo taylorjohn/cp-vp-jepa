@@ -1,0 +1,192 @@
+VL-JEPA Agent (v12)
+
+A CPU-optimized Vision–Language JEPA-style agent with a frozen DINOv2 backbone and a trainable “cortex” (adapter + heads).
+Designed to run reliably on Windows 11 + AMD CPU systems, with full checkpointing, stability tests, and background training support.
+
+⸻
+
+SYSTEM OVERVIEW
+
+Backbone
+Frozen DINOv2 ViT-S/14 (loaded via torch.hub)
+Feature output → 384 dimensions
+
+Trainable Cortex
+Adapter: 384 → 128
+Heads:
+	•	Color classification
+	•	Shape classification
+	•	Size classification
+	•	Sides regression (geometric reasoning)
+
+Training
+Phase 2 uses mixed synthetic supervision and Tiny-ImageNet self-supervision
+CPU-only, multithreaded
+Safe for unattended long runs
+
+⸻
+
+REPOSITORY STRUCTURE
+
+vl-jepa-agent/
+├── vl_jepa_llm_v12.py                Core model and agent logic
+├── train_cortex_phase2_tinyimagenet.py
+│                                    Phase 2 trainer (Tiny-ImageNet)
+├── brain_vector_v12.pth              Active cortex weights (adapter + heads)
+├── brain_vector_v12_backup.pth       Backup of previous brain
+├── memory_vector_v12.json            Learned symbolic concepts
+│
+├── runs/
+│   └── phase2_tiny/
+│       ├── cortex_stepXXXXX.pt       Periodic checkpoints
+│       ├── cortex_interrupt.pt       Saved on Ctrl+C
+│       └── cortex_final.pt           Final trained cortex
+│
+├── datasets/
+│   └── tiny-imagenet-200/             Tiny-ImageNet dataset root
+│
+├── test_v12_smoke.py                 Smoke test
+├── test_v12_parse.py                 Parsing robustness test
+├── test_v12_size_compare.py          Size-aware comparison test
+├── test_v12_compare_stability.py     Similarity stability test
+│
+├── run_all_v12_tests.py              Full test suite runner
+├── amd_batch_stress_test.py          CPU batch-size benchmark
+├── bench_v12_forward.py              Forward-pass speed benchmark
+├── compare_pre_post_brain.py         Brain regression comparison
+├── regression_guard.py               Safety regression checks
+├── requirements.txt
+└── README.md
+
+⸻
+
+INSTALLATION
+
+Create environment
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+Install dependencies
+pip install -r requirements.txt
+
+Requirements
+Python 3.10+
+PyTorch (CPU build)
+PIL / NumPy
+Internet access on first run (for DINOv2 weights)
+
+⸻
+
+USING THE AGENT
+
+Run the agent
+python vl_jepa_llm_v12.py
+
+Supported operations
+LEARN – define new concepts
+COMPARE – similarity between learned concepts
+IMAGINE – render multi-object scenes
+
+Commands are JSON-based and optionally LLM-driven.
+
+⸻
+
+TESTING
+
+Run full test suite
+python run_all_v12_tests.py
+
+Includes
+Smoke test (forward pass)
+Parsing robustness
+Size-aware comparison
+Compare stability (same vs different concepts)
+Forward speed benchmark
+
+All tests pass on Windows + AMD CPU.
+
+⸻
+
+TRAINING – PHASE 2 (TINY-IMAGENET)
+
+Short sanity run
+python train_cortex_phase2_tinyimagenet.py
+–tiny_root .\datasets\tiny-imagenet-200
+–steps 60
+–batch_real 64
+–batch_synth 32
+–threads 24
+–interop 2
+–save_dir runs\phase2_tiny
+–save_every 10
+–log_every 10
+
+Full background run
+python train_cortex_phase2_tinyimagenet.py
+–tiny_root .\datasets\tiny-imagenet-200
+–steps 12000
+–batch_real 128
+–batch_synth 64
+–threads 24
+–interop 2
+–save_dir runs\phase2_tiny
+–save_every 200
+–log_every 50
+
+Features
+Periodic checkpoints
+Graceful Ctrl+C save (cortex_interrupt.pt)
+Final save (cortex_final.pt)
+
+⸻
+
+UPDATING THE ACTIVE BRAIN
+
+Replace the active brain with a trained cortex
+copy .\runs\phase2_tiny\cortex_final.pt .\brain_vector_v12.pth
+
+Verify
+python run_all_v12_tests.py
+
+⸻
+
+CPU OPTIMIZATION
+
+Threading controlled via –threads and –interop
+MKLDNN enabled by default
+
+Benchmark batch scaling
+python amd_batch_stress_test.py
+
+⸻
+
+WINDOWS STABILITY NOTES
+
+All Unicode emoji removed (cp1252 safe)
+No GPU watchdog issues
+Designed for unattended long runs
+Recommended: disable sleep in Windows power settings
+
+⸻
+
+CURRENT STATUS
+
+All tests passing
+Checkpointing verified
+Compare stability verified after training
+Safe background training confirmed
+
+⸻
+
+NEXT POSSIBLE EXTENSIONS
+
+Resume training from checkpoint (–resume)
+Additional relational heads (position, count, symmetry)
+Multi-object contrastive supervision
+Embedding export for downstream retrieval
+
+⸻
+
+Status: Stable
+Platform: Windows 11 + AMD CPU
+Model: VL-JEPA v12
